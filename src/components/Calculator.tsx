@@ -205,7 +205,7 @@ export default function Calculator() {
           {/* Metric Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             <MetricCard color="purple" value={formatNumber(resultados.ipRoas)} label="IP-ROAS" description="&iquest;Cu&aacute;nto debe generar cada peso invertido?" />
-            <MetricCard color="green" value={`${resultados.vum.toLocaleString()} uds`} label="VUM" description="&iquest;Cu&aacute;ntas unidades debo vender?" />
+            <MetricCard color="green" value={`${resultados.vum.toLocaleString()} unidades`} label="VUM" description="&iquest;Cu&aacute;ntas unidades debo vender?" />
             <MetricCard color="orange" value={formatNumber(resultados.roasMinTradicional)} label="ROAS Tradicional" description="&iquest;Retorno m&iacute;nimo en ventas totales?" />
             <MetricCard color="cyan" value={formatCurrency(resultados.cprEstimado)} label="CPR Estimado" description="&iquest;Cu&aacute;nto me cuesta cada venta?" />
           </div>
