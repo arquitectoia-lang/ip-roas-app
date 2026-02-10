@@ -70,7 +70,7 @@ export default function SensitivityChart({ data, xLabel, xFormat }: SensitivityC
             domain={['dataMin', 'dataMax']}
             ticks={ticks}
             stroke="#94a3b8"
-            tick={{ fill: '#94a3b8', fontSize: 11, angle: -45, textAnchor: 'end' }}
+            tick={{ fill: '#94a3b8', fontSize: 11, angle: -45, textAnchor: 'end' } as Record<string, unknown>}
             tickFormatter={(v) => formatXTick(v, xFormat)}
             label={{ value: xLabel, position: 'bottom', offset: 20, fill: '#94a3b8', fontSize: 13 }}
           />

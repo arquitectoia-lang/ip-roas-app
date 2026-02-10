@@ -12,6 +12,7 @@ import {
   calcularSensibilidad,
 } from '@/lib/roas-engine';
 import SensitivityChart from './SensitivityChart';
+import ChatBot from './ChatBot';
 
 function formatCurrency(n: number): string {
   if (!isFinite(n)) return '$--';
@@ -53,6 +54,29 @@ export default function Calculator() {
   const resultados: ResultadosIPROAS = useMemo(() => calcularTodo(params), [params]);
 
   const productoCritico = useMemo(() => productoMargenMinimo(productos), [productos]);
+
+  const chatContext = useMemo(() => {
+    const lines: string[] = [];
+    lines.push(`Inversión Publicitaria (IP): $${ip.toLocaleString()}`);
+    lines.push(`Tarifa Fija (TF): $${tf.toLocaleString()}`);
+    lines.push(`Ingreso Esperado (IE): $${ie.toLocaleString()}`);
+    if (productos.length > 0) {
+      lines.push(`\nProductos (${productos.length}):`);
+      productos.forEach((p) => {
+        lines.push(`- ${p.nombre}: precio=$${p.precio.toLocaleString()}, margen=${(p.margenBruto * 100).toFixed(1)}%, margen_abs=$${margenAbsoluto(p).toLocaleString()}`);
+      });
+      lines.push(`\nResultados:`);
+      lines.push(`- IP-ROAS: ${resultados.ipRoas.toFixed(4)}`);
+      lines.push(`- VUM: ${resultados.vum} unidades`);
+      lines.push(`- ROAS Tradicional Mínimo: ${resultados.roasMinTradicional.toFixed(4)}`);
+      lines.push(`- CPR Estimado: $${resultados.cprEstimado.toFixed(2)}`);
+      lines.push(`- Costos Totales: $${resultados.costosTotales.toLocaleString()}`);
+      lines.push(`- Producto Crítico: ${resultados.productoCritico} (margen abs mínimo: $${resultados.margenMinimoUsado.toFixed(2)})`);
+    } else {
+      lines.push(`\nNo hay productos cargados aún.`);
+    }
+    return lines.join('\n');
+  }, [ip, tf, ie, productos, resultados]);
 
   // ---------- HANDLERS ----------
   const handleAddProduct = useCallback(() => {
@@ -250,6 +274,9 @@ export default function Calculator() {
         <br />
         Desarrollado por Juan Pablo Fern&aacute;ndez Guti&eacute;rrez | &Aacute;rea de Tecnolog&iacute;a
       </footer>
+
+      {/* Chatbot */}
+      <ChatBot calculatorContext={chatContext} />
     </div>
   );
 }
