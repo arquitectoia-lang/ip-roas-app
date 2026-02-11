@@ -1,3 +1,9 @@
+# Calculadora IP-ROAS
+
+🚀 **[Usar la calculadora en línea](https://ip-roas-app.netlify.app)**
+
+Metodología IP-ROAS de SaleADS.ai
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
